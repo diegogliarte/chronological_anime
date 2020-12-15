@@ -35,6 +35,7 @@ def relateds_step(anime):
             relateds_obj.removed_append(anime)
 
 
+
         if "sort" in request.form:
             sort_option = request.form.get('sort_select')
             return redirect(url_for("sorteds", sort_option=sort_option))
@@ -47,6 +48,8 @@ def relateds_step(anime):
     if relateds_obj.first_anime is None:  # If refresh page doesn't add the anime again
         relateds_obj.set_first(anime)
     return render_template("relateds_step.html", olds=relateds_obj.old, news=relateds_obj.new)
+
+
 
 @app.route("/delete", methods=["POST"])
 def delete():
@@ -63,24 +66,22 @@ def delete():
 
 @app.route("/sorteds", methods=["GET", "POST"])
 def sorteds():
+    print(request.method)
     sort_option = request.args.get('sort_option', None)
     relateds_obj.set_sorted()
     relateds_obj.sort_sorted(sort_option)
+    print(relateds_obj.sorted)
     return render_template("sorteds.html", sorteds=relateds_obj.sorted, sort_option=sort_option)
+
 
 @app.route("/sort_reverse", methods=["POST"])
 def sort_reverse():
-    if (request.method == "POST"):
-        jsonResponse = json.loads(request.data.decode('utf-8'))
-        sort_option = jsonResponse["sort_option"]
-        relateds_obj.sort_reverse()
-        relateds_obj.sort_sorted(sort_option)
-        print("Reversed")
-        return render_template("sorteds.html", sorteds=relateds_obj.sorted, sort_option=sort_option), 200
+    relateds_obj.sort_reverse()
+    return render_template("sorteds.html")
 
 def clear_remove():
     global to_remove
     to_remove = []
 
-app.run()
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.run(debug=True)
+

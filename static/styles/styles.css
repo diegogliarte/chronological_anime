@@ -34,9 +34,15 @@ hr {
     cursor: pointer;
 }
 
+.back {
+    position: absolute;
+}
+
 .title {
     font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
     text-transform: uppercase;
+    font-size: 50px;
+    margin-top: 0;
 }
 
 .title i {
@@ -92,6 +98,7 @@ hr {
     font-weight: bold;
     font-size: 20px;
 }
+
 
 .submitButton:hover {
     background: var(--light);

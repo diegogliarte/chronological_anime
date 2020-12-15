@@ -19,17 +19,19 @@ function remove(id, index){
 }
 
 function reverseSort(sort_option){
+
     axios({
         method: 'post',
         url: '/sort_reverse',
         data: {
           sort_option: sort_option,
         },
+        success: location.reload(),
     });
 }
 
-function disableElement(element) {
-
-    element.disabled=true;
-    element.value='Starting…';
+function loadingForm(id) {
+    var button = document.getElementById(id)
+    button.disabled = true
+    console.log("disabled")
 }
