@@ -1,0 +1,100 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+:root {
+    --dark: #1F1F1F;
+    --light: #EFEFEF;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    font-size: 32px;
+}
+
+.center {
+  text-align: center;
+}
+
+hr {
+    width: 50%;
+    border: 2px solid var(--light);
+}
+
+.anime button {
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 32px;
+    outline: 0;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+
+.new button {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.title {
+    font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    text-transform: uppercase;
+}
+
+.title i {
+    margin-left: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#sortByButton {
+    margin-right: 0;
+}
+
+#sortByOptionsLabel {
+    margin: 0;
+}
+
+#sortByOptionsDropdown {
+    background: var(--dark);
+    border: 2px solid var(--light);
+    color: var(--light);
+    margin: 20px;
+    text-align: center;
+    height: 50px;
+    border-radius: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-left: 0;
+    width: auto;
+}
+
+#input {
+    background: var(--light);
+    text-align: center;
+    width: 512px;
+    height: 64px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+}
+
+.submitButton {
+    background: var(--dark);
+    border: 2px solid var(--light);
+    color: var(--light);
+    margin: 20px;
+    text-align: center;
+    height: 50px;
+    border-radius: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.submitButton:hover {
+    background: var(--light);
+    color: var(--dark);
+}
+

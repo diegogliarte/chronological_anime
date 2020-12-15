@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relateds</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/relateds.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');</style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap');</style>
+
+</head>
+<body>
+
+<div class="center">
+    <form method="POST">
+        <input id="input" name="firstAnime">
+        <br>
+        <input id="submitButton" class="submitButton" type="submit" value="START" placeholder="Evangelion or myanimelist/anime/30/Neon_Genesis_Evangelion" onclick="this.submit(); disableElement(this)">
+    </form>
+</div>
+
+</body>
+</html>
+

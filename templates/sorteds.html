@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relateds</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/relateds.css') }}">
+
+</head>
+<body>
+
+
+<div class="center">
+    {% if sorteds %}
+    <p class="title" >Sorted by <b>{{ sort_option }}</b><i class="fa fa-arrows-v" onclick="reverseSort('{{ sort_option }}')"></i></p>
+        {% for sorted in sorteds %}
+            <p class="anime sort"><button type="button" id="sort{{ loop.index0|string }}">{{ sorted.name }} - {{ sorted|attr(sort_option) }}</button></p>
+        {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>
+
