@@ -75,6 +75,11 @@ hr {
     width: auto;
 }
 
+#event-timeline {
+    width: 80%;
+    height: 512px;
+}
+
 #input {
     background: var(--light);
     text-align: center;
@@ -97,7 +102,9 @@ hr {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 20px;
+    width: fit-content;
 }
+
 
 
 .submitButton:hover {

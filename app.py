@@ -1,7 +1,6 @@
 import json
 
-from flask import Flask, render_template, request, redirect, url_for
-from Anime import *
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from Relateds import *
 
 app = Flask(__name__)
@@ -9,32 +8,38 @@ app = Flask(__name__)
 to_remove = []
 relateds_obj = Relateds()
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
 
 @app.route("/relateds", methods=['GET', 'POST'])
 def relateds():
     global relateds_obj
-    relateds_obj = Relateds()
     clear_remove()
-    if request.method == "POST":
-        anime = request.form["firstAnime"]
-        if anime:
-            return redirect(url_for("relateds_step", anime=anime))
-        return render_template("relateds.html")
+
+    if request.method == "POST" and (anime := request.form["firstAnime"]):
+        return redirect(url_for("relateds_step", anime=anime))
 
     return render_template("relateds.html")
+
+@app.route("/timeline", methods=['GET', 'POST'])
+def timeline():
+    test_related = Relateds()
+    test_related.set_first("Steins;Gate")
+    test_related.next_step()
+    test_related.next_step()
+    test_related.set_sorted()
+    test_related.sort_sorted("date_start")
+    test_related.set_timeline()
+    return render_template("timeline.html", data=json.dumps(test_related.timeline))
+
 
 
 @app.route("/relateds/<anime>", methods=["GET", "POST"])
 def relateds_step(anime):
-    global to_remove
+    print("here")
     if request.method == "POST":
-        for anime in to_remove:
-            relateds_obj.removed_append(anime)
-
-
+        to_remove_append()
 
         if "sort" in request.form:
             sort_option = request.form.get('sort_select')
@@ -42,12 +47,14 @@ def relateds_step(anime):
 
         if "nextStep" in request.form:
             relateds_obj.next_step()
+            clear_remove()
 
-        return render_template("relateds_step.html", olds=relateds_obj.old, news=relateds_obj.new)
-    clear_remove()
+
+        return render_template("relateds_step.html", olds=relateds_obj.old, news=relateds_obj.new, to_remove=to_remove)
+
     if relateds_obj.first_anime is None:  # If refresh page doesn't add the anime again
         relateds_obj.set_first(anime)
-    return render_template("relateds_step.html", olds=relateds_obj.old, news=relateds_obj.new)
+    return render_template("relateds_step.html", olds=relateds_obj.old, news=relateds_obj.new, to_remove=to_remove)
 
 
 
@@ -64,13 +71,16 @@ def delete():
 
         return render_template("relateds.html")
 
+
+
+
 @app.route("/sorteds", methods=["GET", "POST"])
 def sorteds():
-    print(request.method)
     sort_option = request.args.get('sort_option', None)
     relateds_obj.set_sorted()
     relateds_obj.sort_sorted(sort_option)
-    print(relateds_obj.sorted)
+    to_remove_remove()
+    clear_remove()
     return render_template("sorteds.html", sorteds=relateds_obj.sorted, sort_option=sort_option)
 
 
@@ -82,6 +92,14 @@ def sort_reverse():
 def clear_remove():
     global to_remove
     to_remove = []
+
+def to_remove_append():
+    for anime in to_remove:
+        relateds_obj.removed_append(anime)
+
+def to_remove_remove():
+    for anime in to_remove:
+        relateds_obj.removed_remove(anime)
 
 app.run(debug=True)
 

@@ -1,3 +1,4 @@
+import json
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -151,4 +152,3 @@ class Anime():
 
 if __name__ == "__main__":
     eva = Anime("Neon Genesis Evangelion")
-    eva.print_all_variables()

@@ -1,3 +1,5 @@
+import pickle
+import sys
 from time import sleep
 from Anime import *
 import operator
@@ -12,6 +14,7 @@ class Relateds():
         self.removed = []  # User didn't want
         self.sorted = []
         self.reversed = False
+        self.timeline = []
 
     def set_first(self, input):
         self.first_anime = Anime(input)
@@ -62,6 +65,12 @@ class Relateds():
     def sort_reverse(self):
         self.reversed = not self.reversed
 
+    def set_timeline(self):
+        for anime in self.sorted:
+            anime_dict = {"name": anime.name, "type": anime.type,"date_start": anime.date_start.strftime("%Y %m %d"), "date_end": anime.date_end.strftime("%Y %m %d"),}
+            self.timeline.append(anime_dict)
+
+
     def print_old(self):
         print("\nOld")
         for i in self.old:
@@ -82,12 +91,14 @@ class Relateds():
 
 
 if __name__ == "__main__":
-    url = "Madoka Magica"
+    url = "FLCL"
     relateds_obj = Relateds()
     relateds_obj.set_first(url)
+    sys.setrecursionlimit(100000)
 
     while input("press: ") == "n":
         # while True:
         relateds_obj.next_step()
         relateds_obj.print_new()
         relateds_obj.sort_sorted("date_start")
+        # Store data (serialize)

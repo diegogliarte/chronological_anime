@@ -1,3 +1,4 @@
+var loading = false
 
 function remove(id, index){
     var anime = document.getElementById("new" + index)
@@ -7,7 +8,6 @@ function remove(id, index){
     } else {
         anime.style.textDecoration = "line-through"
         anime.style.color = "#808080"
-
     }
     axios({
         method: 'post',
@@ -19,19 +19,17 @@ function remove(id, index){
 }
 
 function reverseSort(sort_option){
-
     axios({
         method: 'post',
         url: '/sort_reverse',
         data: {
           sort_option: sort_option,
         },
-        success: location.reload(),
-    });
+    }).then(response => location.reload());
 }
 
 function loadingForm(id) {
     var button = document.getElementById(id)
-    button.disabled = true
-    console.log("disabled")
+    button.type = "text"
+    button.readOnly = true
 }

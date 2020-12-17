@@ -20,13 +20,17 @@
     {% endif %}
     {% if news %}
         {% for new_anime in news %}
-            <p class="anime new"><button type="button" id="new{{ loop.index0|string }}" onclick="remove({{ new_anime.id }}, {{ loop.index0 }})">{{ new_anime.name }}</button></p>
+            {% if new_anime.id|string in to_remove %}
+                <p class="anime new"><button type="button" id="new{{ loop.index0|string }}" style="text-decoration:line-through; color:#808080" onclick="remove({{ new_anime.id }}, {{ loop.index0 }})">{{ new_anime.name }}</button></p>
+            {% else %}
+                <p class="anime new"><button type="button" id="new{{ loop.index0|string }}" onclick="remove({{ new_anime.id }}, {{ loop.index0 }})">{{ new_anime.name }}</button></p>
+            {% endif %}
         {% endfor %}
     {% endif %}
 </div>
 
 <div class="center">
-    <form method="POST" >
+    <form method="POST" onsubmit="loadingForm('nextStepButton')">
         <input type="submit" class="submitButton" id="nextStepButton" name="nextStep" value="NEXT STEP">
         <input type="submit" class="submitButton" id="sortByButton" name="sort" value="SORT BY">
         <label id="sortByOptionsLabel" for="sortByOptionsDropdown"></label>
