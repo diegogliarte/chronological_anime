@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+            integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/relateds.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/table.js') }}"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');</style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap');</style>
+
+</head>
+<body>
+<div class="center container">
+    <table class="table" id="tableStats">
+        <thead>
+        <tr>
+            <th onclick="sortTable(0)">Name</th>
+            <th onclick="sortTable(1)">Air Date</th>
+            <th onclick="sortTable(2)">Score</th>
+            <th onclick="sortTable(3)">Episodes</th>
+            <th onclick="sortTable(4)">Total Duration</th>
+        </tr>
+        </thead>
+        {% for anime in animes |sort(attribute="date_start")%}
+        <tr onclick="window.open('{{anime.url}}')">
+            <td>{{anime.name}}
+                {% if anime.date_start|string == '9999-12-31' %}
+            <td>Unknown</td>
+            {% else %}
+            <td>{{anime.date_start}}</td>
+            {% endif %}
+
+            {% if anime.score == 0 %}
+            <td>N/A</td>
+            {% else %}
+            <td>{{anime.score}}</td>
+            {% endif %}
+
+            {% if anime.status == 'Currently Airing' %}
+            <td>Airing</td>
+            <td>Airing</td>
+            {% elif anime.status == 'Not yet aired'%}
+            <td>-</td>
+            <td>-</td>
+            {% else %}
+            <td>{{anime.episodes}}</td>
+            <td>{{anime.total_duration}}</td>
+            {% endif %}
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>
+

@@ -14,10 +14,11 @@
 <body>
 
 <div class="center">
-    <form method="POST" onsubmit="loadingForm('submitButton')">
-        <input id="input" name="firstAnime">
+    <form method="POST">
+        <input type="text" id="submitter" name="submitter" value="" hidden>
+        <input id="input" name="firstAnime" type="text">
         <br>
-        <input id="submitButton" class="submitButton" type="submit" value="START">
+        <input id="submitButton" class="submitButton" type="submit" value="START" onclick="checkForm(this.id)">
     </form>
 </div>
 

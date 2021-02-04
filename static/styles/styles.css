@@ -80,6 +80,14 @@ hr {
     height: 512px;
 }
 
+.dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    top: 50px;
+    display: inline !important;
+}
+
 #input {
     background: var(--light);
     text-align: center;
@@ -105,10 +113,9 @@ hr {
     width: fit-content;
 }
 
-
-
 .submitButton:hover {
     background: var(--light);
     color: var(--dark);
 }
+
 
