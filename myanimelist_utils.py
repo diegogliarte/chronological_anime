@@ -44,6 +44,7 @@ def scrape_relateds(soup):
                 category = related.text
         return dict_relateds
 
+
 def parse_url(url):
     match = re.match(r"^((?:https:\/\/|www.)?myanimelist\.net\/(?:anime|manga)\/([0-9]*)).*", url)
     return match.group(1)

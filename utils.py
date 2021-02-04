@@ -38,7 +38,7 @@ if __name__ == "__main__":
     relateds.next_step()
     relateds.set_sorted()
     relateds.sort_sorted()
-    print(relateds.sorted)
+    print(relateds.displayed)
     print("\n\n")
     #animes = [Anime("Dragon Ball"), Anime("Dragon Ball Movie 1")]
-    print_order_relateds(relateds.sorted)
+    print_order_relateds(relateds.displayed)

@@ -39,10 +39,6 @@ def relateds_step():
         if submit == "timeline":
             return redirect(url_for("timeline"))
 
-        if submit == "sort":
-            sort_option = request.form.get('sort_select')
-            return redirect(url_for("sorteds", sort_option=sort_option))
-
         if submit == "nextStep":
             relateds.next_step()
             clear_remove()
@@ -66,34 +62,10 @@ def delete():
         return render_template("relateds.html")
 
 
-@app.route("/sorteds", methods=["GET", "POST"])
-def sorteds():
-    sort_option = request.args.get('sort_option', None)
-    relateds.set_sorted()
-    relateds.sort_sorted(sort_option)
-    to_remove_remove()
-    clear_remove()
-    return render_template("sorteds.html", sorteds=relateds.sorted, sort_option=sort_option)
-
-
-@app.route("/sort_reverse", methods=["POST"])
-def sort_reverse():
-    relateds.sort_reverse()
-    return render_template("sorteds.html")
-
-
-@app.route("/timeline", methods=['GET', 'POST'])
-def timeline():
-    relateds.set_sorted()
-    relateds.sort_sorted("date_start")
-    relateds.set_timeline()
-    return render_template("timeline.html", data=json.dumps(relateds.timeline))
-
-
 @app.route("/table", methods=['GET', 'POST'])
 def table():
-    relateds.set_sorted()
-    return render_template("table.html", animes=relateds.sorted)
+    relateds.set_displayed()
+    return render_template("table.html", animes=relateds.displayed)
 
 
 def clear_remove():

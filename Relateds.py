@@ -12,9 +12,7 @@ class Relateds():
         self.old = []  # Already requested
         self.new = []  # To request
         self.removed = []  # User didn't want
-        self.sorted = []
-        self.reversed = False
-        self.timeline = []
+        self.displayed = []
 
     def set_first(self, input):
         self.first_anime = Anime(input)
@@ -56,41 +54,9 @@ class Relateds():
                 self.new.remove(anime)
                 return
 
-    def set_sorted(self):
-        self.sorted = self.old + self.new
-        self.sorted = [item for item in self.sorted if item not in self.removed]
-
-    def sort_sorted(self, attribute="date_start"):
-        keyfun = operator.attrgetter(attribute)
-
-        self.sorted.sort(key=keyfun, reverse=self.reversed)
-
-    def sort_reverse(self):
-        self.reversed = not self.reversed
-
-    def set_timeline(self):
-        for anime in self.sorted:
-            anime_dict = {"name": anime.name, "type": anime.type, "date_start": anime.date_start.strftime("%Y %m %d"),
-                          "date_end": anime.date_end.strftime("%Y %m %d"), }
-            self.timeline.append(anime_dict)
-
-    def print_old(self):
-        print("\nOld")
-        for i in self.old:
-            print(i.name)
-        print()
-
-    def print_removed(self):
-        print("\nRemoved")
-        for i in self.removed:
-            print(i.name)
-        print()
-
-    def print_new(self):
-        print("\nNew")
-        for i in self.new:
-            print(i.name)
-        print()
+    def set_displayed(self):
+        self.displayed = self.old + self.new
+        self.displayed = [item for item in self.displayed if item not in self.removed]
 
 
 if __name__ == "__main__":
