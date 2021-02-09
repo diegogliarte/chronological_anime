@@ -62,7 +62,7 @@ class Anime():
         self.licensors = scrape_info(self.soup, "Licensors:").split(", ")
         self.studios = scrape_info(self.soup, "Studios:").split(", ")
         self.sources = scrape_info(self.soup, "Source:")
-        self.genres = scrape_info(self.soup, "Genres:").split(", ")  # TODO duplicate genre
+        self.genres = scrape_info(self.soup, "Genres:").split(", ")
         self.duration = self.set_duration()
         self.score = self.set_score()
         self.ranked = self.set_int("Ranked:")
@@ -104,15 +104,19 @@ class Anime():
         return title
 
     def set_date(
-            self):  # TODO There are animes with only the year such as https://myanimelist.net/anime/34878, it doesnt match and goes to the max date
+            self):
         aired = scrape_info(self.soup, "Aired:")
-        if match := re.match(r"^(\w{3} [0-9][0-9]?, [0-9]{4})(?: to (\w{3} [0-9][0-9]?, [0-9]{4})?)?", aired):
-            date_start = datetime.datetime.strptime(match.group(1), '%b %d, %Y').date()
+        if match := re.match(r"^((\w{3} [0-9][0-9]?, )?[0-9]{4})(?: to (\w{3} [0-9][0-9]?, [0-9]{4})?)?", aired):
+            if not match.group(2): # Only year start
+                date_start = datetime.datetime.strptime(match.group(1), '%Y').date()
+            else:
+                date_start = datetime.datetime.strptime(match.group(1), '%b %d, %Y').date()
 
-            if match.group(2):  # Only have start date, such as movies
-                return date_start, datetime.datetime.strptime(match.group(2), '%b %d, %Y').date()
+            if match.group(3): # Has end date
+                return date_start, datetime.datetime.strptime(match.group(3), '%b %d, %Y').date()
 
             return date_start, date_start
+
         return datetime.datetime.max.date(), datetime.datetime.max.date()
 
     def set_duration(self):
@@ -162,5 +166,7 @@ class Anime():
 
 
 if __name__ == "__main__":
-    eva = Anime("Akira")
-    eva.print_all_variables()
+    a = Anime("https://myanimelist.net/anime/34878")
+    a.print_all_variables()
+    b = Anime("https://myanimelist.net/anime/2222/Dr_Slump__Arale-chan")
+    b.print_all_variables()

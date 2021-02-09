@@ -1,6 +1,4 @@
-var loading = false
-
-function remove(id, index) {
+function remove(url, index) {
     var anime = document.getElementById("new" + index)
     if (anime.style.textDecoration === "line-through") {
         anime.style.textDecoration = "none"
@@ -13,20 +11,11 @@ function remove(id, index) {
         method: 'post',
         url: '/delete',
         data: {
-            id: id,
+            url: url,
         },
     });
 }
 
-function reverseSort(sort_option) {
-    axios({
-        method: 'post',
-        url: '/sort_reverse',
-        data: {
-            sort_option: sort_option,
-        },
-    }).then(response => location.reload());
-}
 
 function checkForm(id) {
     var element = document.getElementById(id)
@@ -38,13 +27,18 @@ function checkForm(id) {
     element.form.submit();
 }
 
-function checkStep(id, name) {
-    checkFirst(id)
-    axios({
-        method: 'post',
-        url: '/process',
-        data: {
-            data: name,
-        },
-    });
+function downloadString(text, fileType, fileName) {
+    text = text.join("\n")
+    var blob = new Blob([text], {type: fileType});
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () {
+        URL.revokeObjectURL(a.href);
+    }, 1500);
 }

@@ -19,11 +19,18 @@ def scrape_info(soup, info):
         if next:
             text = next
         else:
-            text = vars.parent.text.strip().replace(info, "")
+            text = vars.parent.text.strip().replace(info, "") # TODO See if al this can be done nicer
             text = " ".join(text.split())
+            if info == "Genres:":
+                temp = ""
+                for idx, genre in enumerate(text.split(",")):
+                    genre = genre.strip()
+                    temp += genre[:len(genre)//2] + ", "
+                text = temp[:-2]
 
         return text
-    except:
+    except Exception as e:
+        # print(e)
         return "Scraper failed, data not found"
 
 

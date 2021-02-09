@@ -12,7 +12,7 @@ body {
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 hr {
@@ -20,23 +20,6 @@ hr {
     border: 2px solid var(--light);
 }
 
-.anime button {
-    background: none;
-    border: none;
-    color: var(--light);
-    font-size: 32px;
-    outline: 0;
-    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
-}
-
-.new button {
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.back {
-    position: absolute;
-}
 
 .title {
     font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
@@ -51,42 +34,42 @@ hr {
     cursor: pointer;
 }
 
-#sortByButton {
-    margin-right: 0;
-}
+/*#sortByButton {*/
+/*    margin-right: 0;*/
+/*}*/
 
-#sortByOptionsLabel {
-    margin: 0;
-}
+/*#sortByOptionsLabel {*/
+/*    margin: 0;*/
+/*}*/
 
-#sortByOptionsDropdown {
-    background: var(--dark);
-    border: 2px solid var(--light);
-    color: var(--light);
-    margin: 20px;
-    text-align: center;
-    height: 50px;
-    border-radius: 2px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
-    margin-left: 0;
-    width: auto;
-}
+/*#sortByOptionsDropdown {*/
+/*    background: var(--dark);*/
+/*    border: 2px solid var(--light);*/
+/*    color: var(--light);*/
+/*    margin: 20px;*/
+/*    text-align: center;*/
+/*    height: 50px;*/
+/*    border-radius: 2px;*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-weight: bold;*/
+/*    font-size: 20px;*/
+/*    text-transform: uppercase;*/
+/*    margin-left: 0;*/
+/*    width: auto;*/
+/*}*/
 
-#event-timeline {
-    width: 80%;
-    height: 512px;
-}
+/*#event-timeline {*/
+/*    width: 80%;*/
+/*    height: 512px;*/
+/*}*/
 
-.dot {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    top: 50px;
-    display: inline !important;
-}
+/*.dot {*/
+/*    position: relative;*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    top: 50px;*/
+/*    display: inline !important;*/
+/*}*/
 
 #input {
     background: var(--light);
@@ -99,7 +82,7 @@ hr {
     text-transform: uppercase;
 }
 
-.submitButton {
+.submit {
     background: var(--dark);
     border: 2px solid var(--light);
     color: var(--light);
@@ -113,9 +96,11 @@ hr {
     width: fit-content;
 }
 
-.submitButton:hover {
+.submit:hover {
     background: var(--light);
     color: var(--dark);
 }
+
+
 
 

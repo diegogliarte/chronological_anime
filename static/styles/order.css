@@ -1,0 +1,17 @@
+:root {
+    --dark: #1F1F1F;
+    --light: #EFEFEF;
+}
+
+.listDiv {
+    margin: 50px;
+}
+
+.list {
+    font-size: 20px;
+}
+
+.fa-download:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

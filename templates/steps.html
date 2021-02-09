@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relateds</title>
+    <!--    IMPORTS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
+            integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
+            crossorigin="anonymous"></script>
+    <!--    JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/advanced_options.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+    <!--    CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/steps.css') }}">
+
+
+</head>
+<body>
+
+<div class="center">
+    {% if olds %}
+    {% for old_anime in olds %}
+    <p class="anime old">
+        <button type="button" id="old{{ loop.index0|string }}">{{ old_anime.name }}</button>
+    </p>
+    {% endfor %}
+    <hr>
+    {% endif %}
+    {% if news %}
+    {% for new_anime in news %}
+    {% if new_anime.url in removeds %}
+    <p class="anime new">
+        <button type="button" id="new{{ loop.index0|string }}" style="text-decoration:line-through; color:#808080"
+                onclick="remove('{{ new_anime.url }}', {{ loop.index0 }})">{{ new_anime.name }}
+        </button>
+    </p>
+    {% else %}
+    <p class="anime new">
+        <button type="button" id="new{{ loop.index0|string }}"
+                onclick="remove('{{ new_anime.url }}', {{ loop.index0 }})">
+            {{ new_anime.name }}
+        </button>
+    </p>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+<div class="center">
+    <form method="POST">
+        <input type="text" id="submitter" name="submitter" value="" hidden>
+        <input type="submit" class="submit" id="nextStepButton" name="nextStep" value="NEXT STEP"
+               onclick="checkForm(this.id)">
+        <input type="submit" class="submit" id="tableButton" name="table" value="TABLE"
+               onclick="checkForm(this.id)">
+        <input type="submit" class="submit" id="orderButton" name="order" value="CHRONOLOGICAL ORDER"
+               onclick="checkForm(this.id)">
+    </form>
+    <div class="advancedDiv">
+        <i onclick="toggleAdvancedOptions()" id="advancedIcon" class="fa fa-plus-circle advanced"
+           aria-hidden="true"></i>
+        <span onclick="toggleAdvancedOptions()" id="advancedIconText" class="advanced">Show advanced options</span>
+        <div class="advancedTextDiv" id="advancedTextDiv" hidden="true">
+            <textarea onkeypress="" class="advancedText" name="excluded" id="excluded" cols="30" rows="1"></textarea>
+            <textarea onkeypress="" class="advancedText" name="included" id="included" cols="30" rows="1"></textarea>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

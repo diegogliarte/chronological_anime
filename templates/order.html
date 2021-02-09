@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Relateds</title>
+    <title>Order</title>
     <!--    IMPORTS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
             integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
@@ -13,18 +13,18 @@
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
     <!--    CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/steps.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/order.css') }}">
 
 </head>
 <body>
 
-<div class="center">
-    <form method="POST">
-        <input type="text" id="submitter" name="submitter" value="" hidden>
-        <input id="input" name="firstAnime" type="text">
-        <br>
-        <input id="submitButton" class="submit" type="submit" value="START" onclick="checkForm(this.id)">
-    </form>
+<div class="center listDiv">
+    <i style="font-size: 20px" class="fa fa-download" aria-hidden="true"
+       onclick="downloadString({{message}}, 'text/plain', 'order')"> Download as text</i>
+    {% for line in message %}
+    <p class="list">{{line}}</p>
+    {% endfor %}
+
 </div>
 
 </body>

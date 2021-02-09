@@ -1,0 +1,39 @@
+:root {
+    --dark: #1F1F1F;
+    --light: #EFEFEF;
+}
+
+.anime button {
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 32px;
+    outline: 0;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+
+.new button {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.advanced {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.advancedDiv {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.advancedText {
+    resize: none;
+}
+
+.advancedTextDiv {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}

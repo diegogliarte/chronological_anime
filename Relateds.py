@@ -12,7 +12,8 @@ class Relateds():
         self.old = []  # Already requested
         self.new = []  # To request
         self.removed = []  # User didn't want
-        self.displayed = []
+        self.pending_removed = [] # User will remove them once they hit next step
+        self.displayed = [] # New + Old but not in Removed nor Pending Removed
 
     def set_first(self, input):
         self.first_anime = Anime(input)
@@ -22,7 +23,10 @@ class Relateds():
         self.new.append(Anime(input))
 
     def next_step(self):
+        self.removed += self.pending_removed
+        self.clear_pending_remove()
         temp = []
+        self.new = [anime for anime in self.new if anime.url not in self.removed]
         current = self.new[:]
         for anime in current:
             relateds = anime.relateds
@@ -30,7 +34,7 @@ class Relateds():
                 for value in values:
                     if all(anime.url != value for anime in self.old) and \
                             all(anime.url != value for anime in self.new) and \
-                            all(anime.url != value for anime in self.removed) and \
+                            all(url != value for url in self.removed) and \
                             re.match(r"^(?:https:\/\/|www.)?myanimelist\.net\/(anime|manga)\/[0-9]*.*", value).group(
                                 1) != "manga":
                         new = Anime(value)
@@ -40,23 +44,18 @@ class Relateds():
             self.old.append(anime)
         self.new += temp
 
-    def removed_remove(self, id):
-        for anime in self.removed:
-            if anime.id == id:
-                self.removed.remove(anime)
-                self.new.append(anime)
-                return
+    def toggle_pending_remove(self, url):
+        if url in self.pending_removed:
+            self.pending_removed.remove(url)
+        else:
+            self.pending_removed.append(url)
 
-    def removed_append(self, id):
-        for anime in self.new:
-            if anime.id == id:
-                self.removed.append(anime)
-                self.new.remove(anime)
-                return
+    def clear_pending_remove(self):
+        self.pending_removed = []
 
     def set_displayed(self):
         self.displayed = self.old + self.new
-        self.displayed = [item for item in self.displayed if item not in self.removed]
+        self.displayed = [item for item in self.displayed if item.url not in self.removed and item.url not in self.pending_removed]
 
 
 if __name__ == "__main__":

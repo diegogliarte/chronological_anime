@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Table</title>
+    <!--    IMPORTS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
             integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ=="
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/relateds.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/table.js') }}"></script>
     <style>@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');</style>
     <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap');</style>
+    <!--    JS-->
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/table.js') }}"></script>
+    <!--    CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/shared.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
 
 </head>
 <body>
@@ -27,8 +30,9 @@
             <th onclick="sortTable(4)">Total Duration</th>
         </tr>
         </thead>
+
         {% for anime in animes |sort(attribute="date_start")%}
-        <tr onclick="window.open('{{anime.url}}')">
+        <tr onclick="window.open('{{anime.url}}')" class="normalRow">
             <td>{{anime.name}}
                 {% if anime.date_start|string == '9999-12-31' %}
             <td>Unknown</td>
@@ -55,6 +59,13 @@
 
         </tr>
         {% endfor %}
+        <tr id="extraRow">
+            <td></td>
+            <td></td>
+            <td>Average: {{score}}</td>
+            <td>Total: {{episodes}}</td>
+            <td>Total: {{duration}}</td>
+        </tr>
     </table>
 </div>
 

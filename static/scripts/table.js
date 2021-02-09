@@ -1,7 +1,6 @@
 const forbiddenWords = ["unknown", "airing", "n/a"]
 
 function sortTable(n) {
-    console.log(n)
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("tableStats");
     switching = true;
