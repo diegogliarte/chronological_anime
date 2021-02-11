@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../static/media/icon.jpg"/>
     <title>Relateds</title>
     <!--    IMPORTS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
@@ -13,10 +14,20 @@
     <!--    CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/steps.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/navbar.css') }}">
 
 
 </head>
 <body>
+<div class="topnav" id="myTopnav">
+    <a href="{{ url_for('index') }}">Index</a>
+    <a href="{{ url_for('relateds') }}" class="active">Relateds</a>
+    <a href="#people">People</a>
+    <a href="#FAQ">FAQ</a>
+    <a href="" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
 
 <div class="center">
     {% if olds %}

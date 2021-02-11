@@ -19,19 +19,13 @@ def scrape_info(soup, info):
         if next:
             text = next
         else:
-            text = vars.parent.text.strip().replace(info, "") # TODO See if al this can be done nicer
+            text = vars.parent.text.strip().replace(info, "")
             text = " ".join(text.split())
-            if info == "Genres:":
-                temp = ""
-                for idx, genre in enumerate(text.split(",")):
-                    genre = genre.strip()
-                    temp += genre[:len(genre)//2] + ", "
-                text = temp[:-2]
 
         return text
     except Exception as e:
         # print(e)
-        return "Scraper failed, data not found"
+        return "Data not found"
 
 
 def scrape_relateds(soup):
@@ -49,7 +43,26 @@ def scrape_relateds(soup):
                     dict_relateds.setdefault(category, []).append(parse_url(url))
             else:
                 category = related.text
-        return dict_relateds
+    return dict_relateds
+
+def scrape_user(user): # TODO complete user class and methods
+    offset = 0
+    json = get_user_json(user, offset)
+    entries = []
+
+    while (json and not "errors" in json):
+        offset += 300
+        entries += json
+        json = get_user_json(user, offset)
+
+    print("ENTRIES", entries)
+    for idx, entry in enumerate(entries):
+        print(idx, entry["anime_title"])
+
+def get_user_json(user, offset):
+    url = f"https://myanimelist.net/animelist/{user}/load.json?status=7&offset={offset}"
+    request = requests.get(url)
+    return request.json()
 
 
 def parse_url(url):
@@ -58,8 +71,9 @@ def parse_url(url):
 
 
 if __name__ == "__main__":
-    url = "https://myanimelist.net/anime/30/Neon_Genesis_Evangelion?q=evangelion&cat=anime"
-    response = requests.get(url)
-    html = response.text
-    soup = BeautifulSoup(html, features="html.parser")
-    print(scrape_info(soup, "Premiered:"))
+    # url = "https://myanimelist.net/anime/30/Neon_Genesis_Evangelion?q=evangelion&cat=anime"
+    # response = requests.get(url)
+    # html = response.text
+    # soup = BeautifulSoup(html, features="html.parser")
+    # print(scrape_info(soup, "Premiered:"))
+    scrape_user("NexxBahamut")

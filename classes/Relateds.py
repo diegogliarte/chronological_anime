@@ -1,8 +1,5 @@
-import pickle
 import sys
-from time import sleep
-from Anime import *
-import operator
+from classes.Anime import *
 
 
 class Relateds():
@@ -24,7 +21,7 @@ class Relateds():
 
     def next_step(self):
         self.removed += self.pending_removed
-        self.clear_pending_remove()
+        self.pending_removed = []
         temp = []
         self.new = [anime for anime in self.new if anime.url not in self.removed]
         current = self.new[:]
@@ -50,9 +47,6 @@ class Relateds():
         else:
             self.pending_removed.append(url)
 
-    def clear_pending_remove(self):
-        self.pending_removed = []
-
     def set_displayed(self):
         self.displayed = self.old + self.new
         self.displayed = [item for item in self.displayed if item.url not in self.removed and item.url not in self.pending_removed]
@@ -67,6 +61,4 @@ if __name__ == "__main__":
     while input("press: ") == "n":
         # while True:
         relateds.next_step()
-        relateds.print_new()
-        relateds.sort_sorted("date_start")
         # Store data (serialize)

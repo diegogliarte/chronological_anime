@@ -1,9 +1,11 @@
 :root {
     --dark: #1F1F1F;
-    --light: #EFEFEF;
+    --light: #efefef;
 }
 
 .anime button {
+    padding: 10px;
+    margin: 10px;
     background: none;
     border: none;
     color: var(--light);

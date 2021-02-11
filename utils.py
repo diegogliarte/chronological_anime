@@ -1,6 +1,4 @@
-from Anime import *
-from Relateds import *
-from operator import attrgetter
+from classes.Relateds import *
 import math
 
 def order_relateds(animes):

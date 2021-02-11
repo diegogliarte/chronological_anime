@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../static/media/icon.jpg"/>
     <title>Table</title>
     <!--    IMPORTS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"
@@ -16,9 +17,20 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/shared.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/navbar.css') }}">
 
 </head>
 <body>
+<div class="topnav" id="myTopnav">
+    <a href="#home" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
 <div class="center container">
     <table class="table" id="tableStats">
         <thead>
@@ -27,7 +39,7 @@
             <th onclick="sortTable(1)">Air Date</th>
             <th onclick="sortTable(2)">Score</th>
             <th onclick="sortTable(3)">Episodes</th>
-            <th onclick="sortTable(4)">Total Duration</th>
+            <th onclick="sortTable(4)">Watch Time</th>
         </tr>
         </thead>
 
@@ -54,7 +66,7 @@
             <td>-</td>
             {% else %}
             <td>{{anime.episodes}}</td>
-            <td>{{anime.total_duration}}</td>
+            <td>{{anime.watch_time}}</td>
             {% endif %}
 
         </tr>

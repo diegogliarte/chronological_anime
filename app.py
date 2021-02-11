@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from Relateds import *
+from flask import Flask, render_template, request, redirect, url_for, json
 from utils import *
 
 app = Flask(__name__)
@@ -59,9 +58,15 @@ def table():
         episodes = 0
         duration = 0
     else:
-        score = round(sum(anime.score for anime in relateds.displayed) / len(relateds.displayed), 3)
+        count = 0
+        accum = 0
+        for anime in relateds.displayed:
+            if anime.score > 0:
+                accum += anime.score
+                count += 1
+        score = round(accum) / count
         episodes = sum(anime.episodes for anime in relateds.displayed)
-        duration = sum([anime.total_duration for anime in relateds.displayed], datetime.timedelta())
+        duration = sum([anime.watch_time for anime in relateds.displayed], datetime.timedelta())
     return render_template("table.html", animes=relateds.displayed, score=score, episodes=episodes, duration=duration)
 
 
@@ -70,6 +75,5 @@ def order():
     relateds.set_displayed()
     message = order_relateds(relateds.displayed)
     return render_template("order.html", message=message.split("\n"))
-
 
 app.run(debug=True)

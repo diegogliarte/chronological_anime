@@ -14,7 +14,7 @@ function sortTable(n) {
         rows = table.rows;
         /*Loop through all table rows (except the
         first, which contains table headers):*/
-        for (i = 1; i < (rows.length - 1); i++) {
+        for (i = 1; i < (rows.length - 2); i++) {
             //start by saying there should be no switching:
             shouldSwitch = false;
             /*Get the two elements you want to compare,
@@ -75,7 +75,7 @@ function compare(a, b, n) {
             return a > b
         case 3: // Episodes
             return parseInt(a) > parseInt(b)
-        case 4: // Total Duration
+        case 4: // Watch Time
             let reggie = /(^(\d*) days?, )?(\d*):(\d*):(\d*)$/
 
             var dateA = toDate(a)
